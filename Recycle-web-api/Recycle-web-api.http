@@ -1,0 +1,11 @@
+@Recycle_web_api_HostAddress = http://localhost:5239
+
+GET {{Recycle_web_api_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{Recycle_web_api_HostAddress}}/todos/1
+Accept: application/json
+
+###
