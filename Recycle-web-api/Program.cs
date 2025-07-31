@@ -1,11 +1,21 @@
+using Recycle_web_api.Abstrations;
+using Recycle_web_api.Services;
+
 var builder = WebApplication.CreateSlimBuilder(args);
 
+// usado para serializar respostas dos endpoints gerados usando MinialAPIs
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.TypeInfoResolver = AppJsonSerializerContext.Default;
+});
+
+builder.Services.AddScoped<ICicloDeVidaService, CicloDeVidaService>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -19,7 +29,7 @@ var sampleTodos = new Todo[] {
 };
 
 // minimal api bom para projetos pequenos e performáticos
-var todosApi = app.MapGroup("/todos");
+var todosapi = app.MapGroup("/todos");
 
 if (app.Environment.IsDevelopment())
 {
@@ -27,8 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-todosApi.MapGet("/", () => sampleTodos);
-todosApi.MapGet("/{id}", (int id) =>
+todosapi.MapGet("/", () => sampleTodos);
+todosapi.MapGet("/{id}", (int id) =>
     sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
         ? Results.Ok(todo)
         : Results.NotFound());

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Recycle_web_api.Abstrations;
 
 namespace Recycle_web_api.Controllers
 {
@@ -6,10 +7,15 @@ namespace Recycle_web_api.Controllers
     [ApiController]
     public class TesteController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        public ICicloDeVidaService _cicloDeVidaService { get; set; }
+        public TesteController(ICicloDeVidaService cicloDeVidaService)
         {
-            return Ok("Teste novo controller");
+            _cicloDeVidaService = cicloDeVidaService;
+        }   
+        [HttpGet]
+        public ActionResult<Resultado> Get()
+        {
+            return Ok(new Resultado(_cicloDeVidaService.GetContador()));
         }
     }
 }
