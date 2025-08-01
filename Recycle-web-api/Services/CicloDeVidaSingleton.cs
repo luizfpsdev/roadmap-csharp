@@ -4,7 +4,7 @@ namespace Recycle_web_api.Services
 {
     public class CicloDeVidaSingleton : ICiclodeVidaSingleton
     {
-        public static int contador;
+        private static int contador;
         public CicloDeVidaSingleton()
         {
             contador++;

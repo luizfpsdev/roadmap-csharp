@@ -2,7 +2,7 @@
 
 namespace Recycle_web_api.Services
 {
-    public class CicloDeVidaTransientService : ICicloDeVidaService
+    public class CicloDeVidaTransientService : ICicloDeVidaTransientService
     {
         private static int contador;
         public CicloDeVidaTransientService()

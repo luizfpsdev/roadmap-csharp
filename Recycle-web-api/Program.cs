@@ -16,6 +16,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddScoped<ICicloDeVidaService, CicloDeVidaService>();
 builder.Services.AddSingleton<ICiclodeVidaSingleton, CicloDeVidaSingleton>();
+builder.Services.AddTransient<ICicloDeVidaTransientService, CicloDeVidaTransientService>();
 
 
 builder.Services.AddSwaggerGen();
