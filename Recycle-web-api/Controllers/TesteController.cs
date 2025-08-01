@@ -8,14 +8,22 @@ namespace Recycle_web_api.Controllers
     public class TesteController : ControllerBase
     {
         public ICicloDeVidaService _cicloDeVidaService { get; set; }
-        public TesteController(ICicloDeVidaService cicloDeVidaService)
+        public ICiclodeVidaSingleton CiclodeVidaSingleton { get; }
+
+        public TesteController(ICicloDeVidaService cicloDeVidaService, ICiclodeVidaSingleton ciclodeVidaSingleton)
         {
             _cicloDeVidaService = cicloDeVidaService;
+            CiclodeVidaSingleton = ciclodeVidaSingleton;
         }   
-        [HttpGet]
+        [HttpGet("/scoped")]
         public ActionResult<Resultado> Get()
         {
             return Ok(new Resultado(_cicloDeVidaService.GetContador()));
+        }
+        [HttpGet("/singleton")]
+        public ActionResult<Resultado> GetSingleton()
+        {
+            return Ok(new Resultado(CiclodeVidaSingleton.GetContador()));
         }
     }
 }

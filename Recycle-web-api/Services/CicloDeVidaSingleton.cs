@@ -2,10 +2,10 @@
 
 namespace Recycle_web_api.Services
 {
-    public class CicloDeVidaService : ICicloDeVidaService
+    public class CicloDeVidaSingleton : ICiclodeVidaSingleton
     {
         public static int contador = 0;
-        public CicloDeVidaService()
+        public CicloDeVidaSingleton()
         {
             contador++;
         }
