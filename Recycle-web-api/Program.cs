@@ -1,4 +1,5 @@
 using Recycle_web_api.Abstrations;
+using Recycle_web_api.Middlewares;
 using Recycle_web_api.Services;
 
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -39,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<CultureMidleware>();
 
 todosapi.MapGet("/", () => sampleTodos);
 todosapi.MapGet("/{id}", (int id) =>
