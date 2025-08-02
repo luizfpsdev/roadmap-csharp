@@ -41,7 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<CultureMidleware>();
+app.UseMiddleware<PrimeiroMiddleware>();
+app.UseMiddleware<SegundoMiddleware>();
 
 todosapi.MapGet("/", () => sampleTodos);
 todosapi.MapGet("/{id}", (int id) =>
